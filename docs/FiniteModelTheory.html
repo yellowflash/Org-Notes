@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Finite Model Theory</title>
+<!-- 2018-08-29 wo 13:49 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Yellowflash" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Finite Model Theory</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. First order logic and SQL</a></li>
+<li><a href="#sec-2">2. Complexity theory</a></li>
+<li><a href="#sec-3">3. Regular expressions and First order logic</a></li>
+<li><a href="#sec-4">4. Introduction to Mathematical Logic.</a></li>
+<li><a href="#sec-5">5. Computability</a></li>
+<li><a href="#sec-6">6. Inexpressibility proofs.</a>
+<ul>
+<li><a href="#sec-6-1">6.1. Connectivity of arbitrary graphs in not FO definable.</a></li>
+<li><a href="#sec-6-2">6.2. Compactness fails over finite models</a></li>
+<li><a href="#sec-6-3">6.3. Even cardinality is not FO definable</a></li>
+<li><a href="#sec-6-4">6.4. For every finite structure \(A\) there is a sentence \(S\) such that \(B \models S \iff B \cong A\)</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7. Ehrenfeucht-Fraisse games.</a>
+<ul>
+<li><a href="#sec-7-1">7.1. Game steps</a></li>
+<li><a href="#sec-7-2">7.2. Partial isomorphism</a></li>
+<li><a href="#sec-7-3">7.3. Game on linear order</a></li>
+</ul>
+</li>
+<li><a href="#sec-8">8. Games and expressive power of FO</a>
+<ul>
+<li><a href="#sec-8-1">8.1. Quantifier rank</a></li>
+<li><a href="#sec-8-2">8.2. Ehrenfeucht-Fraisse theorem</a></li>
+<li><a href="#sec-8-3">8.3. Rank k types</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> First order logic and SQL</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Inexpressibility of first order logic to express 
+<ul class="org-ul">
+<li>transitivity
+</li>
+<li>acyclicity
+</li>
+<li>cardinality queries
+</li>
+</ul>
+</li>
+<li>Extensions to SQL like count -&gt; Do they allow us to express acyclicity
+</li>
+<li>What about other extensions like Fixed points?
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Complexity theory</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>Second order existential quantifier followed by first order formula
+<ul class="org-ul">
+<li>\(∃SO = NP\) .
+</li>
+<li>The secord order existential quantifier express the guessing stage and the first order formula expresses the verification stage.
+</li>
+<li>Fagin's theorem.
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Regular expressions and First order logic</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>First order logic cannot fully express every regular expression.
+</li>
+<li>You need monadic second order logic to express every regular expression.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Introduction to Mathematical Logic.</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>Vocabulary - Collection of constants, functions, relations.
+<ul class="org-ul">
+<li>Vocabulary is almost always atmost countable.
+</li>
+<li>In finite model theory vocabulary is finite and relational (ie., only constants and relations no functions).
+</li>
+</ul>
+</li>
+<li>Structure is finite if the universe is finite.
+</li>
+<li>Assume infinitely many variables, (countable)
+</li>
+<li>Term is inductively defined.
+<ul class="org-ul">
+<li>Variable is a term.
+</li>
+<li>Constant is a term.
+</li>
+<li>\(f_k(t_1, t_2 .. t_k)\) is a term if \(f_k\) is a k-ary function and \(t_1..t_k\) are terms.
+</li>
+</ul>
+</li>
+<li>Formula is inductively defined
+<ul class="org-ul">
+<li>\(t_1 = t_2\) is atomic formula when \(t_1\) and \(t_2\) are terms.
+</li>
+<li>\(p_k(t_1, t_2 .. t_k)\) is a formula if \(p_k\) is a k-ary relation and \(t_1..t_k\) are terms.
+</li>
+<li>if \(A\) and \(B\) are formulae, then \(A \wedge B\) , \(A \vee B\) and \(\neg A\) are formulae
+if \(A\) is a formula then \(\exists x A\) and \(\forall x A\) is a formula.
+</li>
+</ul>
+</li>
+<li>Free variable of a formula is defined as
+<ul class="org-ul">
+<li>if x is a variable, only free variable is x itself.
+</li>
+<li>constants dont have any free variable.
+</li>
+<li>free variables in \(t1 = t2\) are free variables in \(t1\) union free variables in \(t2\)
+</li>
+<li>free variables in \(A \wedge B\) and \(A \vee B\) is union of free variables in \(A\) and free variables in \(B\)
+</li>
+<li>free variables in \(\neg A\) is exactly the free variables of \(A\)
+</li>
+<li>free variables in \(\exists x A\) and \(\forall x A\) is free variables of \(A\) with \(x\) removed from it.
+</li>
+</ul>
+</li>
+<li>Completeness \imply Compactness
+</li>
+<li>Validity is recursively enumerble if we consider arbitrary model
+<ul class="org-ul">
+<li>Its not recursively enumerable incase we consider only finite models.
+</li>
+</ul>
+</li>
+<li>Homomorphism, Isomorphism.
+</li>
+<li>Lowenheim Skolem
+<ul class="org-ul">
+<li>Every theory with infinite model has a countable model.
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Computability</h2>
+<div class="outline-text-2" id="text-5">
+<ul class="org-ul">
+<li>Regular Expressions = Languages recognized by NDFA = Languages recognized by DFA
+</li>
+<li>Turing machine, deterministic/non deterministic
+<ul class="org-ul">
+<li>If there is a halting machine for a language, the machine is called decider and the language is called recursive.
+</li>
+<li>Halting problem - Whether a machine M halts on input a is not recursive
+</li>
+<li>Halting on empty input is also not decidable.
+</li>
+<li>Any non trivial property of Turing machine is not decidable.
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Inexpressibility proofs.</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Connectivity of arbitrary graphs in not FO definable.</h3>
+<div class="outline-text-3" id="text-6-1">
+<ul class="org-ul">
+<li>Consider sentence \(C\) define the connectivity
+</li>
+<li>For every n let \(P_n\) defines a statement which establishes there is no path of length \(n\).
+</li>
+<li>Now consider the infinite set \(\{C\} \cup \{P_0 ... \}\) this set is obviously inconsistent.
+</li>
+<li>But every finite subset of it is consistent.
+</li>
+<li>Only contradiction could be that \(C\) is not definable in first place.
+</li>
+<li>Hence connectivity is not FO definable.
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2"><span class="section-number-3">6.2</span> Compactness fails over finite models</h3>
+<div class="outline-text-3" id="text-6-2">
+<ul class="org-ul">
+<li>If we take finite graphs is connectivity definable?
+</li>
+<li>Is this true? theory \(T\) has a finite model if every finite subset of of \(T\) has finite model? (No.)
+</li>
+<li>Let \(P_n\) define a statement which says there are <b>atleast</b> n elements.
+</li>
+<li>Obviously \(\{P_0, P_1... \}\) has no finite model but every finite subset of it do.
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-6-3" class="outline-3">
+<h3 id="sec-6-3"><span class="section-number-3">6.3</span> Even cardinality is not FO definable</h3>
+<div class="outline-text-3" id="text-6-3">
+<ul class="org-ul">
+<li>Even cardinality makes sense only in finite models
+</li>
+<li>Suppose E is a statement which defines the fact that there are even number of elements.
+</li>
+<li>Suppose P<sub>i</sub> is defined as above.
+</li>
+<li>Now by compactness \(\{E\} \cup \{P_0, P_1...\}\)  and \(\{ \neg E \} \cup \{P_0, P_1 ... \}\) are consistent.
+</li>
+<li>Assume the theory doesn't have any other vocabulary (no constant, no relations)
+</li>
+<li>They are just countable sets, hence they are isomorphic, but in one of them E is true, and other E is false.
+</li>
+<li>Hence contradiction.
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-6-4" class="outline-3">
+<h3 id="sec-6-4"><span class="section-number-3">6.4</span> For every finite structure \(A\) there is a sentence \(S\) such that \(B \models S \iff B \cong A\)</h3>
+<div class="outline-text-3" id="text-6-4">
+<ul class="org-ul">
+<li>A and B are isomorphic iff they agree on every Boolean query.
+</li>
+<li>Boolean queries are closed under isomorphism.
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Ehrenfeucht-Fraisse games.</h2>
+<div class="outline-text-2" id="text-7">
+</div><div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1"><span class="section-number-3">7.1</span> Game steps</h3>
+<div class="outline-text-3" id="text-7-1">
+<ul class="org-ul">
+<li>Two players, spoiler vs duplicator.
+</li>
+<li>Spoiler picks the structure \(A\) or \(B\)
+</li>
+<li>Spoiler makes a move by picking an element \(a \in A\) or \(a \in B\).
+</li>
+<li>Duplicator responds by picking an element from the other structure.
+</li>
+<li>Duplicator has a n-step winning strategy if after n-steps he could establish partial isomorphism no matter how spoiler plays.
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-7-2" class="outline-3">
+<h3 id="sec-7-2"><span class="section-number-3">7.2</span> Partial isomorphism</h3>
+<div class="outline-text-3" id="text-7-2">
+<ul class="org-ul">
+<li>Let \(A\) and \(B\) be two \(\sigma\)-structures. (\(\sigma\) is a vocabulary)
+</li>
+<li>tuples \((a_1,...,a_n)\) and \((b_1,..,b_n)\) are partially isomorphic if
+<ul class="org-ul">
+<li>for every \(i,j \leq n\) \(a_i = a_j \iff b_i = b_j\)
+</li>
+<li>for every constant \(c\) from \(\sigma\) and \(i \leq n\) \(a_i = c_A \iff b_i = c_B\)
+</li>
+<li>for every k-ary relation \(P\),  \((a_{i_1},..,a_{i_k}) \in P^A \iff  (b_{i_1},..,b_{i_k}) \in P^B\)
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-7-3" class="outline-3">
+<h3 id="sec-7-3"><span class="section-number-3">7.3</span> Game on linear order</h3>
+<div class="outline-text-3" id="text-7-3">
+<ul class="org-ul">
+<li>Suppose \(\sigma\) contains the binary relation \(<\) interpreted as a linear order.
+</li>
+<li>If \(L_1\) and \(L_2\) are linear orders of size atleast \(m\) and \(m \geq n\), is \(L_1 {\cong}_n L_2\)
+</li>
+<li>Consider the sets \(\{1,2\}\) and \({1,2,3}\). Now if the spoiler plays \(2\) duplicator has to play either \(1\) or \(2\) and the next move spoiler wins the game.
+</li>
+<li>But if \(n\) is much smaller than sizes of linear order the game can be won by duplicator.
+</li>
+<li>If \(L_1\) and \(L_2\) are linear orders of length atleast \(2^k\) then \(L_1 {\cong}_k L_2\).
+<ul class="org-ul">
+<li>Its sort of like binary search to find a flaw here, the proof can be worked out in detail though.
+</li>
+</ul>
+</li>
+<li>Suppose \(L_1^{\geq a}\) be a substructure of all elements \(x\), \(x \geq a\) and similarly \(L_1^{\leq a}\).
+<ul class="org-ul">
+<li>If \(L_1^{\leq a} \cong_k L_2^{\leq b}\) and \(L_1^{geq a} \cong_k L_2^{\geq b}\) then \((L_1, a) \cong_k (L_2, b)\).
+</li>
+<li>This could be used under induction to prove the previous game.
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Games and expressive power of FO</h2>
+<div class="outline-text-2" id="text-8">
+</div><div id="outline-container-sec-8-1" class="outline-3">
+<h3 id="sec-8-1"><span class="section-number-3">8.1</span> Quantifier rank</h3>
+<div class="outline-text-3" id="text-8-1">
+<ul class="org-ul">
+<li>The quantifier rank of a formula is the depth of the quantifier nesting, ie.,
+<ul class="org-ul">
+<li>If \(\phi\) is atomic then \(qr(\phi) = 0\)
+</li>
+<li>\(qr(A \vee B) = qr(A \wedge B) = max(qr(A), qr(B))\)
+</li>
+<li>\(qr(\neg A) = qr(A)\)
+</li>
+<li>\(qr(\exists x A) = qr(\forall x A) = qr(A) + 1\)
+</li>
+</ul>
+</li>
+<li>\(FO[k]\) is used to represent all the first-order formulae of quantifier rank k.
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-8-2" class="outline-3">
+<h3 id="sec-8-2"><span class="section-number-3">8.2</span> Ehrenfeucht-Fraisse theorem</h3>
+<div class="outline-text-3" id="text-8-2">
+<ul class="org-ul">
+<li>Let \(A\) and \(B\) are relational structures, then the following are equivalent
+<ul class="org-ul">
+<li>\(A\) and \(B\) agree on \(FO[k]\)
+</li>
+<li>\(A \equiv_k B\) 
+</li>
+</ul>
+</li>
+<li>A property \(P\) of finite \(\sigma\)-structure is not expressible in FO if for every \(k \in N\) if there are two structures \(A\) and \(B\) such that,
+<ul class="org-ul">
+<li>\(A \equiv_k B\)
+</li>
+<li>\(A\) has the property while \(B\) doesn't.
+</li>
+</ul>
+</li>
+<li>Even is not FO definable (Take two structure of size \(\geq 2^k\) one even and one odd, \(FO[k]\) cannot distinguish them, with or without linear order).
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-8-3" class="outline-3">
+<h3 id="sec-8-3"><span class="section-number-3">8.3</span> Rank k types</h3>
+<div class="outline-text-3" id="text-8-3">
+<ul class="org-ul">
+<li>If \(\sigma\) is finite, then there are only finitely many \(FO[k]\) for each \(k\) with m free variables.
+<ul class="org-ul">
+<li>If you consider each atomic formula with m-free variable as propositions, then there are finately many boolean combinations of them (How many boolean functions are there from \(p\) boolean variables?)
+</li>
+<li>If there are only finitely many \(FO[k]\) formulae  with \(m+1\) free variables, then there are finitely many \(FO[k+1]\) formulae with \(m\) free variables.
+</li>
+</ul>
+</li>
+<li>Fix a relational vocabulary \(\sigma\) if \(A\) is a \(sigma\)-structure then, the rank-k m-type is consistent set of \(FO[k]\) formulae with \(m\) free variables.
+<ul class="org-ul">
+<li>Every rank-k types are maximally consistent set of \(FO[k]\) formulae, if \(\phi(x_1, .. x_m) \in FO[k]\) then either \(\phi\) or \(\neg \phi\) is in rank-k type.
+</li>
+</ul>
+</li>
+<li>Since \(FO[k]\) is finite upto equivalence, for given \(m\) then every rank-k m-structure can be expressed as a conjunction of all \(FO[k]\) true formulae.
+</li>
+<li>The equivalence relation \(\equiv_k\) is of finite index.
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Yellowflash</p>
+<p class="date">Created: 2018-08-29 wo 13:49</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.2.2 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

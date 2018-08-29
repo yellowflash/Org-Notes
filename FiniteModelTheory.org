@@ -1,0 +1,140 @@
+#+TITLE: Finite Model Theory
+#+AUTHOR: Yellowflash
+
+#+OPTIONS: tex:t
+# -*- mode: org; -*-
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+#+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+#+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="https://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="https://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+
+* First order logic and SQL
+  + Inexpressibility of first order logic to express 
+   + transitivity
+   + acyclicity
+   + cardinality queries
+  + Extensions to SQL like count -> Do they allow us to express acyclicity
+  + What about other extensions like Fixed points?
+
+* Complexity theory
+  + Second order existential quantifier followed by first order formula
+   + $∃SO = NP$ .
+   + The secord order existential quantifier express the guessing stage and the first order formula expresses the verification stage.
+   + Fagin's theorem.
+
+* Regular expressions and First order logic
+  + First order logic cannot fully express every regular expression.
+  + You need monadic second order logic to express every regular expression.
+
+* Introduction to Mathematical Logic.
+  + Vocabulary - Collection of constants, functions, relations.
+   + Vocabulary is almost always atmost countable.
+   + In finite model theory vocabulary is finite and relational (ie., only constants and relations no functions).
+  + Structure is finite if the universe is finite.
+  + Assume infinitely many variables, (countable)
+  + Term is inductively defined.
+   + Variable is a term.
+   + Constant is a term.
+   + $f_k(t_1, t_2 .. t_k)$ is a term if $f_k$ is a k-ary function and $t_1..t_k$ are terms.
+  + Formula is inductively defined
+   + $t_1 = t_2$ is atomic formula when $t_1$ and $t_2$ are terms.
+   + $p_k(t_1, t_2 .. t_k)$ is a formula if $p_k$ is a k-ary relation and $t_1..t_k$ are terms.
+   + if $A$ and $B$ are formulae, then $A \wedge B$ , $A \vee B$ and $\neg A$ are formulae
+    if $A$ is a formula then $\exists x A$ and $\forall x A$ is a formula.
+  + Free variable of a formula is defined as
+   + if x is a variable, only free variable is x itself.
+   + constants dont have any free variable.
+   + free variables in $t1 = t2$ are free variables in $t1$ union free variables in $t2$
+   + free variables in $A \wedge B$ and $A \vee B$ is union of free variables in $A$ and free variables in $B$
+   + free variables in $\neg A$ is exactly the free variables of $A$
+   + free variables in $\exists x A$ and $\forall x A$ is free variables of $A$ with $x$ removed from it.
+  + Completeness \imply Compactness
+  + Validity is recursively enumerble if we consider arbitrary model
+   + Its not recursively enumerable incase we consider only finite models.
+  + Homomorphism, Isomorphism.
+  + Lowenheim Skolem
+   + Every theory with infinite model has a countable model.
+
+* Computability
+  + Regular Expressions = Languages recognized by NDFA = Languages recognized by DFA
+  + Turing machine, deterministic/non deterministic
+   + If there is a halting machine for a language, the machine is called decider and the language is called recursive.
+   + Halting problem - Whether a machine M halts on input a is not recursive
+   + Halting on empty input is also not decidable.
+   + Any non trivial property of Turing machine is not decidable.
+
+* Inexpressibility proofs.
+** Connectivity of arbitrary graphs in not FO definable.
+   + Consider sentence $C$ define the connectivity
+   + For every n let $P_n$ defines a statement which establishes there is no path of length $n$.
+   + Now consider the infinite set $\{C\} \cup \{P_0 ... \}$ this set is obviously inconsistent.
+   + But every finite subset of it is consistent.
+   + Only contradiction could be that $C$ is not definable in first place.
+   + Hence connectivity is not FO definable.
+** Compactness fails over finite models
+   + If we take finite graphs is connectivity definable?
+   + Is this true? theory $T$ has a finite model if every finite subset of of $T$ has finite model? (No.)
+   + Let $P_n$ define a statement which says there are *atleast* n elements.
+   + Obviously $\{P_0, P_1... \}$ has no finite model but every finite subset of it do.
+** Even cardinality is not FO definable
+   + Even cardinality makes sense only in finite models
+   + Suppose E is a statement which defines the fact that there are even number of elements.
+   + Suppose P_i is defined as above.
+   + Now by compactness $\{E\} \cup \{P_0, P_1...\}$  and $\{ \neg E \} \cup \{P_0, P_1 ... \}$ are consistent.
+   + Assume the theory doesn't have any other vocabulary (no constant, no relations)
+   + They are just countable sets, hence they are isomorphic, but in one of them E is true, and other E is false.
+   + Hence contradiction.
+** For every finite structure $A$ there is a sentence $S$ such that $B \models S \iff B \cong A$
+   + A and B are isomorphic iff they agree on every Boolean query.
+   + Boolean queries are closed under isomorphism.
+
+* Ehrenfeucht-Fraisse games.
+** Game steps
+  + Two players, spoiler vs duplicator.
+  + Spoiler picks the structure $A$ or $B$
+  + Spoiler makes a move by picking an element $a \in A$ or $a \in B$.
+  + Duplicator responds by picking an element from the other structure.
+  + Duplicator has a n-step winning strategy if after n-steps he could establish partial isomorphism no matter how spoiler plays.
+** Partial isomorphism
+    + Let $A$ and $B$ be two $\sigma$-structures. ($\sigma$ is a vocabulary)
+    + tuples $(a_1,...,a_n)$ and $(b_1,..,b_n)$ are partially isomorphic if
+      + for every $i,j \leq n$ $a_i = a_j \iff b_i = b_j$
+      + for every constant $c$ from $\sigma$ and $i \leq n$ $a_i = c_A \iff b_i = c_B$
+      + for every k-ary relation $P$,  $(a_{i_1},..,a_{i_k}) \in P^A \iff  (b_{i_1},..,b_{i_k}) \in P^B$
+** Game on linear order
+  + Suppose $\sigma$ contains the binary relation $<$ interpreted as a linear order.
+  + If $L_1$ and $L_2$ are linear orders of size atleast $m$ and $m \geq n$, is $L_1 {\cong}_n L_2$
+  + Consider the sets $\{1,2\}$ and ${1,2,3}$. Now if the spoiler plays $2$ duplicator has to play either $1$ or $2$ and the next move spoiler wins the game.
+  + But if $n$ is much smaller than sizes of linear order the game can be won by duplicator.
+  + If $L_1$ and $L_2$ are linear orders of length atleast $2^k$ then $L_1 {\cong}_k L_2$.
+    + Its sort of like binary search to find a flaw here, the proof can be worked out in detail though.
+  + Suppose $L_1^{\geq a}$ be a substructure of all elements $x$, $x \geq a$ and similarly $L_1^{\leq a}$.
+    + If $L_1^{\leq a} \cong_k L_2^{\leq b}$ and $L_1^{geq a} \cong_k L_2^{\geq b}$ then $(L_1, a) \cong_k (L_2, b)$.
+    + This could be used under induction to prove the previous game.
+
+* Games and expressive power of FO
+** Quantifier rank
+   + The quantifier rank of a formula is the depth of the quantifier nesting, ie.,
+     + If $\phi$ is atomic then $qr(\phi) = 0$
+     + $qr(A \vee B) = qr(A \wedge B) = max(qr(A), qr(B))$
+     + $qr(\neg A) = qr(A)$
+     + $qr(\exists x A) = qr(\forall x A) = qr(A) + 1$
+   + $FO[k]$ is used to represent all the first-order formulae of quantifier rank k.
+** Ehrenfeucht-Fraisse theorem
+   + Let $A$ and $B$ are relational structures, then the following are equivalent
+     + $A$ and $B$ agree on $FO[k]$
+     + $A \equiv_k B$ 
+   + A property $P$ of finite $\sigma$-structure is not expressible in FO if for every $k \in N$ if there are two structures $A$ and $B$ such that,
+     + $A \equiv_k B$
+     + $A$ has the property while $B$ doesn't.
+   + Even is not FO definable (Take two structure of size $\geq 2^k$ one even and one odd, $FO[k]$ cannot distinguish them, with or without linear order).
+** Rank k types
+   + If $\sigma$ is finite, then there are only finitely many $FO[k]$ for each $k$ with m free variables.
+     + If you consider each atomic formula with m-free variable as propositions, then there are finately many boolean combinations of them (How many boolean functions are there from $p$ boolean variables?)
+     + If there are only finitely many $FO[k]$ formulae  with $m+1$ free variables, then there are finitely many $FO[k+1]$ formulae with $m$ free variables.
+   + Fix a relational vocabulary $\sigma$ if $A$ is a $sigma$-structure then, the rank-k m-type is consistent set of $FO[k]$ formulae with $m$ free variables.
+     + Every rank-k types are maximally consistent set of $FO[k]$ formulae, if $\phi(x_1, .. x_m) \in FO[k]$ then either $\phi$ or $\neg \phi$ is in rank-k type.
+   + Since $FO[k]$ is finite upto equivalence, for given $m$ then every rank-k m-structure can be expressed as a conjunction of all $FO[k]$ true formulae.
+   + The equivalence relation $\equiv_k$ is of finite index.
