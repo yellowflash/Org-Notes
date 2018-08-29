@@ -1,0 +1,8 @@
+#+TITLE: Notes
+#+AUTHOR: Yellowflash
+
+#+INCLUDE: "./Notes.layout"
+
+* All Notes
++ [[./Algebra.html][Algebra]]
++ [[./FiniteModelTheory.html][Finite Model Theory]]
